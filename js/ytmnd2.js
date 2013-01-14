@@ -1,9 +1,18 @@
+/*
+ * ytmnd2.js
+ * Copyright (c) 2013 Joseph Lee <josephl@cecs.pdx.edu>
+ * See LICENSE for licensing rules
+ * Project page: http://github.com/josephl/ytmnd2
+ * Example page: http://josephl.github.com/ytmnd2
+ */
 
 var app = app || {};
 
 // set preferences here
-var bg = 'img/finding_forrester_2.jpg';
-var zoomText = 'YOURE THE MAN NOW DOG TWO';
+var bg = 'img/finding_forrester_2.jpg'; // background image
+var subtitles = 'subtitles.txt';    // URL of file containt text to be zoomed
+                                    // change content of default file 'subtitles'
+                                    // or change to url of this value
 
 $('body').css('background-image', 'url(' + bg + ')');
 
@@ -122,7 +131,6 @@ define(['jquery'], function($) {
                 lines.push(templine.join(' '));
             }
         }
-        //return lines;
         _.each(lines, function(line) {
             app.ytmndCollection.add({ text: line });
         })
@@ -130,9 +138,8 @@ define(['jquery'], function($) {
 
     // Main Application
     var AppView = Backbone.View.extend({
+
         el: '#main',
-
-
 
         initialize: function() {
             this.listenTo(app.ytmndCollection, 'add', this.addLine);
@@ -145,12 +152,14 @@ define(['jquery'], function($) {
 
     });
 
-
     app.appView = new AppView();
-    parseLines(zoomText);
 
-    //app.ytmndView = new YtmndView({ model: app.ytmndCollection.at(0) });
-    //app.ytmndView.render();
-    //app.ytmndModel.set({ text: zoomText });
+    // get text w/ajax
+    $.ajax({
+        url: subtitles,
+        success: function(data) {
+            parseLines(data);
+        }
+    });
 
 });
