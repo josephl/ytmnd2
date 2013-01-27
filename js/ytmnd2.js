@@ -9,7 +9,7 @@
 var app = app || {};
 
 // set preferences here
-var bg = 'img/finding_forrester_2.jpg'; // background image
+var bg = 'img/staceykingmeatball_sm.jpg'; // background image
 var subtitles = 'subtitles.txt';    // URL of file containt text to be zoomed
                                     // change content of default file 'subtitles'
                                     // or change to url of this value
@@ -22,7 +22,7 @@ define(['jquery'], function($) {
 
         defaults: function() {
             return {
-                text: 'YOURE THE MAN NOW DOG.COM',
+                text: 'I LIKE MY MEATBALLS SPICY!!!',
                 index: app.ytmndCollection.getIndex()
             };
         },
@@ -65,12 +65,12 @@ define(['jquery'], function($) {
                     fontSize: i * 2 + 'pt',
                     left: i * 2 + 'px',
                     top: (this.model.get('index') * 250 + i) + 'px',
-                    color: 'rgb('+(i*4)+', '+(i*4)+', '+(i*4)+')'
+                    color: 'rgb('+(i*4)+', '+(0)+', '+(0)+')'
                 };
                 this.$el.append(this.template(_.extend(tempModel, temp2)));
             }
 
-            temp2.color = 'rbg(255, 255, 255)';
+            temp2.color = 'rgb(0, 0, 0)';
             this.$el.append(this.template(_.extend(tempModel, temp2)));
 
             return this;
